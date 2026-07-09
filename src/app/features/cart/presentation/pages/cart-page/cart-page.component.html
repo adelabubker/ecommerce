@@ -1,0 +1,73 @@
+<main class="cart-page">
+  <section class="cart-header">
+    <p>Shopping Cart</p>
+    <h1>My Cart</h1>
+    <span>Review your selected fresh products before checkout.</span>
+  </section>
+
+  @if (cart.lines().length === 0) {
+    <section class="empty-cart">
+      <div class="empty-icon" aria-hidden="true">0</div>
+      <h2>Your cart is empty</h2>
+      <p>Browse the shop and add fresh produce to prepare your order.</p>
+      <a routerLink="/shop">Go to Shop</a>
+    </section>
+  } @else {
+    <section class="cart-layout" aria-label="Shopping cart details">
+      <div class="cart-lines">
+        @for (line of cart.lines(); track line.id) {
+          <article class="cart-line">
+            <img [src]="line.imageUrl" [alt]="line.name">
+
+            <div class="line-info">
+              <h2>{{ line.name }}</h2>
+              <p>{{ line.unitPrice | currency: 'USD' }}</p>
+
+              <div class="quantity-control" aria-label="Quantity selector">
+                <button
+                  type="button"
+                  [attr.aria-label]="'Decrease ' + line.name + ' quantity'"
+                  (click)="cart.decreaseQuantity(line.id)"
+                >
+                  &minus;
+                </button>
+                <span aria-live="polite">{{ line.quantity }}</span>
+                <button
+                  type="button"
+                  [attr.aria-label]="'Increase ' + line.name + ' quantity'"
+                  (click)="cart.increaseQuantity(line.id)"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <strong>{{ line.quantity * line.unitPrice | currency: 'USD' }}</strong>
+          </article>
+        }
+      </div>
+
+      <aside class="cart-summary" aria-label="Cart summary">
+        <h2>Cart Total</h2>
+        <p>Shipping and totals will update as checkout grows.</p>
+
+        <div>
+          <span>Subtotal</span>
+          <strong>{{ cart.total() | currency: 'USD' }}</strong>
+        </div>
+
+        <div>
+          <span>Shipping</span>
+          <strong>Free</strong>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong>{{ cart.total() | currency: 'USD' }}</strong>
+        </div>
+
+        <a routerLink="/shop">Continue Shopping</a>
+      </aside>
+    </section>
+  }
+</main>

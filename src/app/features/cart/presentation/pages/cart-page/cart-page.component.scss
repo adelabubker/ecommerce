@@ -1,0 +1,230 @@
+.cart-page {
+  width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-5) 0 var(--space-6);
+}
+
+.cart-header {
+  margin-bottom: var(--space-3);
+}
+
+.cart-header p {
+  margin: 0 0 0.4rem;
+  color: var(--color-brand);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cart-header h1 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.cart-header span {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.cart-lines,
+.cart-summary,
+.empty-cart {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.cart-line {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-line:last-child {
+  border-bottom: 0;
+}
+
+.cart-line img {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  background: var(--color-subtle);
+}
+
+.line-info h2 {
+  margin: 0 0 0.35rem;
+  color: var(--color-ink);
+  font-size: 1rem;
+}
+
+.line-info p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.quantity-control {
+  display: inline-grid;
+  grid-template-columns: 36px 46px 36px;
+  align-items: center;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+}
+
+.quantity-control button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  color: var(--color-ink);
+  background: transparent;
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.quantity-control button:hover {
+  color: #ffffff;
+  background: var(--color-brand);
+}
+
+.quantity-control span {
+  display: grid;
+  min-width: 46px;
+  height: 36px;
+  place-items: center;
+  border-inline: 1px solid var(--color-border);
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.cart-line strong {
+  color: var(--color-ink);
+}
+
+.cart-summary {
+  position: sticky;
+  top: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.cart-summary h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.25rem;
+}
+
+.cart-summary > p {
+  margin: -0.5rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.cart-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--color-muted);
+}
+
+.summary-total {
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-ink);
+}
+
+.cart-summary a,
+.empty-cart a {
+  display: inline-flex;
+  justify-content: center;
+  min-height: 46px;
+  align-items: center;
+  padding: 0 1.25rem;
+  border-radius: var(--radius-pill);
+  color: #ffffff;
+  background: var(--color-brand);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.cart-summary a:hover,
+.empty-cart a:hover {
+  background: var(--color-brand-strong);
+}
+
+.empty-cart {
+  display: grid;
+  justify-items: center;
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.empty-icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  margin-bottom: var(--space-2);
+  border-radius: 50%;
+  color: var(--color-brand);
+  background: #e9f8ec;
+  font-weight: 900;
+}
+
+.empty-cart h2 {
+  margin: 0 0 0.5rem;
+}
+
+.empty-cart p {
+  max-width: 420px;
+  margin: 0 0 var(--space-3);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
+  .cart-line {
+    grid-template-columns: 80px minmax(0, 1fr);
+  }
+
+  .cart-line img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-line strong {
+    grid-column: 2;
+  }
+}

@@ -1,0 +1,39 @@
+<main class="favorites-page">
+  <section class="favorites-header" aria-labelledby="favoritesTitle">
+    <p class="eyebrow">Wishlist</p>
+    <h1 id="favoritesTitle">Favorites</h1>
+    <p>Save products you love and return to them when you are ready to order.</p>
+  </section>
+
+  @if (favoriteProducts().length > 0) {
+    <section class="favorites-grid" aria-label="Favorite products">
+      @for (product of favoriteProducts(); track product.id) {
+        <article class="favorite-card">
+          <button
+            type="button"
+            class="remove-favorite"
+            [attr.aria-label]="'Remove ' + product.name + ' from favorites'"
+            (click)="favorites.remove(product.id)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 21s-7.2-4.4-9.6-8.7C.7 9.2 2.2 5.4 5.7 4.6c2-.5 3.8.3 5 1.8.3.4.8.4 1.1 0 1.2-1.5 3-2.3 5-1.8 3.5.8 5 4.6 3.3 7.7C19.2 16.6 12 21 12 21Z" />
+            </svg>
+          </button>
+
+          <a [routerLink]="['/shop/product', product.slug]">
+            <img [src]="product.imageUrl" [alt]="product.name">
+            <span>{{ product.categoryName }}</span>
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.price | currency: 'USD' }} / {{ product.unit }}</p>
+          </a>
+        </article>
+      }
+    </section>
+  } @else {
+    <section class="state-panel">
+      <h2>No favorites yet</h2>
+      <p>Tap the heart on any product in the shop to save it here.</p>
+      <a routerLink="/shop">Explore Products</a>
+    </section>
+  }
+</main>

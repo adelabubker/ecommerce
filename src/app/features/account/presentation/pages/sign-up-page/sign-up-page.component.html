@@ -1,0 +1,67 @@
+<main class="account-page">
+  <section class="account-hero" aria-labelledby="accountTitle">
+    <div>
+      <p class="eyebrow">Sign up</p>
+      <h1 id="accountTitle">Create your Kosa account.</h1>
+      <p>
+        Save your details, build your favorites, and make your next fresh order faster.
+      </p>
+    </div>
+
+    <a routerLink="/sign-in">Already have an account?</a>
+  </section>
+
+  <section class="account-shell" aria-label="Create account">
+    <div class="account-panel">
+      <form class="account-form" aria-labelledby="signupTitle">
+        <div>
+          <p class="form-kicker">Create account</p>
+          <h2 id="signupTitle">Join Kosa today</h2>
+        </div>
+
+        <label>
+          <span>Full name</span>
+          <input type="text" autocomplete="name" placeholder="Your full name" required>
+        </label>
+
+        <label>
+          <span>Email address</span>
+          <input type="email" autocomplete="email" placeholder="name@example.com" required>
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input type="password" autocomplete="new-password" placeholder="Create password" required>
+        </label>
+
+        <label>
+          <span>Phone number</span>
+          <input type="tel" autocomplete="tel" placeholder="+962 7 0000 0000">
+        </label>
+
+        <label class="check-field">
+          <input type="checkbox" required>
+          <span>I agree to receive order updates from Kosa.</span>
+        </label>
+
+        <button type="submit">Create account</button>
+
+        <p class="account-switch">
+          Already registered?
+          <a routerLink="/sign-in">Sign in</a>
+        </p>
+      </form>
+    </div>
+
+    <aside class="account-benefits" aria-label="Account benefits">
+      <span>Why create one?</span>
+      <h2>Your grocery flow becomes easier every time you come back.</h2>
+
+      <ul>
+        <li>Save delivery contact details.</li>
+        <li>Keep favorite produce ready.</li>
+        <li>Build faster carts for weekly orders.</li>
+      </ul>
+    </aside>
+  </section>
+</main>

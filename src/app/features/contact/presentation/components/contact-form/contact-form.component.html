@@ -1,0 +1,61 @@
+<form
+  id="contactForm"
+  class="contact-form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  aria-labelledby="contactFormTitle"
+>
+  <div class="form-heading">
+    <h2 id="contactFormTitle">Just Say Hello!</h2>
+    <p>
+      Tell us what you need and our team will help you with fresh products, orders, or delivery.
+    </p>
+  </div>
+
+  @if (contact.submitState().message) {
+    <div class="success-message" role="status">
+      {{ contact.submitState().message }}
+    </div>
+  }
+
+  <div class="input-row">
+    <div>
+      <label for="contactName">Name</label>
+      <input id="contactName" type="text" formControlName="name" autocomplete="name" placeholder="Your name">
+      @if (hasError('name')) {
+        <p class="error-message">Name is required.</p>
+      }
+    </div>
+
+    <div>
+      <label for="contactEmail">Email</label>
+      <input
+        id="contactEmail"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        placeholder="you@example.com"
+      >
+      @if (hasError('email')) {
+        <p class="error-message">Enter a valid email.</p>
+      }
+    </div>
+  </div>
+
+  <div>
+    <label for="contactMessage">Message</label>
+    <textarea
+      id="contactMessage"
+      rows="6"
+      formControlName="message"
+      placeholder="How can we help?"
+    ></textarea>
+    @if (hasError('message')) {
+      <p class="error-message">Message is required.</p>
+    }
+  </div>
+
+  <div class="form-footer">
+    <button type="submit">Send Message</button>
+  </div>
+</form>

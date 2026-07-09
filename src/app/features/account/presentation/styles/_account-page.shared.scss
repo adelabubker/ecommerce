@@ -1,0 +1,270 @@
+.account-page {
+  width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-5) 0 var(--space-6);
+}
+
+.account-hero {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg, rgba(246, 251, 247, 0.96), rgba(255, 255, 255, 0.96)),
+    #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.eyebrow,
+.form-kicker {
+  margin: 0 0 0.5rem;
+  color: var(--color-brand);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.account-hero h1 {
+  max-width: 680px;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.account-hero p:last-child {
+  max-width: 620px;
+  margin: var(--space-1) 0 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.account-hero a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.2rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-brand);
+  background: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.account-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.account-panel,
+.account-benefits {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.account-panel {
+  padding: var(--space-3);
+}
+
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin-bottom: var(--space-3);
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-subtle);
+}
+
+.mode-tabs button {
+  min-height: 42px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: var(--color-muted);
+  background: transparent;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mode-tabs button.active {
+  color: #ffffff;
+  background: var(--color-brand);
+  box-shadow: 0 8px 18px rgba(53, 168, 107, 0.18);
+}
+
+.account-form {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.account-form h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.65rem;
+}
+
+.account-form label:not(.check-field) {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.account-form label span {
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.account-form input:not([type='checkbox']) {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 0.95rem;
+  color: var(--color-ink);
+  background: #ffffff;
+}
+
+.account-form input:not([type='checkbox']):focus {
+  border-color: var(--color-brand);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(53, 168, 107, 0.12);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+}
+
+.form-row a {
+  color: var(--color-brand);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.check-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.check-field input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-brand);
+}
+
+.account-form > button {
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: #ffffff;
+  background: var(--color-brand);
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.account-form > button:hover {
+  background: var(--color-brand-strong);
+  box-shadow: 0 10px 22px rgba(53, 168, 107, 0.2);
+  transform: translateY(-1px);
+}
+
+.account-switch {
+  margin: 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.account-switch a {
+  color: var(--color-brand);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.account-switch a:hover {
+  color: var(--color-brand-strong);
+}
+
+.account-benefits {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.account-benefits span {
+  color: var(--color-brand);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.account-benefits h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+.account-benefits ul {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-benefits li {
+  padding: 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  background: var(--color-subtle);
+}
+
+@media (max-width: 860px) {
+  .account-hero,
+  .account-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .account-hero {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .account-hero,
+  .account-panel,
+  .account-benefits {
+    padding: var(--space-2);
+  }
+
+  .form-row {
+    align-items: start;
+    flex-direction: column;
+  }
+}

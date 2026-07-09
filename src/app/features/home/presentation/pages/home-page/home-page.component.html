@@ -1,0 +1,59 @@
+<main class="home-page">
+  <section class="hero" aria-labelledby="homeHeroTitle">
+    <div class="hero-content">
+      <p class="eyebrow">Welcome to Kosa</p>
+      <h1 id="homeHeroTitle">Fresh & Healthy Organic Food</h1>
+      <p class="sale">Sale up to <strong>30% OFF</strong></p>
+      <p class="subtitle">Free shipping on all your orders. We deliver, you enjoy.</p>
+      <a routerLink="/shop" class="shop-now">Shop now</a>
+    </div>
+
+    <img src="assets/images/hero/organic-food.png" alt="Fresh organic food" class="hero-image">
+  </section>
+
+  <section class="home-section">
+    <h2>Top Category</h2>
+
+    <div class="category-grid">
+      @for (category of home.categories; track category.slug) {
+        <a class="category-card" [routerLink]="['/shop/category', category.slug]">
+          <img [src]="category.imageUrl" [alt]="category.name">
+          <h3>{{ category.name }}</h3>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-header">
+      <h2>Newest Products</h2>
+      <a routerLink="/shop">View All</a>
+    </div>
+
+    <div class="product-grid">
+      @for (product of home.newestProducts; track product.slug) {
+        <a class="product-card" [routerLink]="['/shop/product', product.slug]">
+          <img [src]="product.imageUrl" [alt]="product.name">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.price }}</p>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="home-section instagram" aria-labelledby="instagramTitle">
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">Fresh moments</p>
+        <h2 id="instagramTitle">Follow us on Instagram</h2>
+      </div>
+      <a routerLink="/contact">Contact Us</a>
+    </div>
+
+    <div class="instagram-grid">
+      @for (image of home.instagramImages; track image.imageUrl) {
+        <img [src]="image.imageUrl" [alt]="image.alt">
+      }
+    </div>
+  </section>
+</main>

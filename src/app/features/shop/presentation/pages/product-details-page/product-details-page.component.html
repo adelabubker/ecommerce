@@ -1,0 +1,67 @@
+<main class="product-details-page">
+  @if (product(); as product) {
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/shop">Shop</a>
+      <span aria-hidden="true">/</span>
+      <a [routerLink]="['/shop/category', product.categorySlug]">{{ product.categoryName }}</a>
+    </nav>
+
+    <section class="product-shell" aria-labelledby="productTitle">
+      <div class="product-media">
+        <div class="main-image">
+          <img [src]="activeImage()" [alt]="product.name">
+        </div>
+
+        <div class="gallery-thumbs" aria-label="Product images">
+          @for (imageUrl of getGalleryImages(product); track imageUrl) {
+            <button
+              type="button"
+              [class.active]="activeImage() === imageUrl"
+              [attr.aria-label]="'Show image for ' + product.name"
+              [attr.aria-pressed]="activeImage() === imageUrl"
+              (click)="selectImage(imageUrl)"
+            >
+              <img [src]="imageUrl" [alt]="product.name">
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="product-copy">
+        <p class="eyebrow">{{ product.categoryName }}</p>
+        <h1 id="productTitle">{{ product.name }}</h1>
+        <p class="summary">{{ product.summary }}</p>
+        <p class="description">{{ getDescription(product) }}</p>
+
+        <div class="product-price">
+          <strong>{{ product.price | currency: 'USD' }}</strong>
+          <span>{{ product.unit }}</span>
+        </div>
+
+        <div class="product-details">
+          <span>Availability</span>
+          <strong>{{ product.inStock ? 'In stock' : 'Out of stock' }}</strong>
+        </div>
+
+        <div class="product-actions">
+          <button
+            type="button"
+            class="add-cart-button"
+            [disabled]="!product.inStock"
+            (click)="addToCart(product)"
+          >
+            Add to Cart
+          </button>
+
+          <a class="back-link" routerLink="/shop">Back to Shop</a>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <section class="state-panel">
+      <h1>Product not found</h1>
+      <p>This product may have moved or is no longer available.</p>
+      <a routerLink="/shop">Back to Shop</a>
+    </section>
+  }
+</main>

@@ -1,0 +1,185 @@
+<div class="app-shell">
+  <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="top-header">
+      <div class="page-container top-header-content">
+        <a routerLink="/home" class="brand" aria-label="Kosa home">
+          <img src="assets/images/logo/Kosa-logo.png" alt="Kosa">
+        </a>
+
+        <form class="search-form" role="search" (submit)="$event.preventDefault()">
+          <label class="visually-hidden" for="siteSearch">Search</label>
+          <input id="siteSearch" type="search" placeholder="Search fresh products">
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="header-actions" aria-label="Header actions">
+          <a routerLink="/favorites" class="icon-link" aria-label="Wishlist">
+            <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 21s-7.2-4.4-9.6-8.7C.7 9.2 2.2 5.4 5.7 4.6c2-.5 3.8.3 5 1.8.3.4.8.4 1.1 0 1.2-1.5 3-2.3 5-1.8 3.5.8 5 4.6 3.3 7.7C19.2 16.6 12 21 12 21Z" />
+            </svg>
+            @if (favorites.count() > 0) {
+              <em aria-label="Favorite items">{{ favorites.count() }}</em>
+            }
+          </a>
+
+          <button
+            type="button"
+            class="cart-link"
+            aria-label="Open shopping cart"
+            (click)="cart.openDrawer()"
+          >
+            <svg class="app-icon cart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 .1 0H17ZM5.2 5l1.1 8.1A3 3 0 0 0 9.3 16h7.3a3 3 0 0 0 2.9-2.3l1.2-5A2 2 0 0 0 18.8 6H7.1L6.8 3.8A2 2 0 0 0 4.8 2H3a1 1 0 0 0 0 2h1.8l.4 1Zm2.2 3h11.4l-1.2 5.2a1 1 0 0 1-1 .8H9.3a1 1 0 0 1-1-.9L7.4 8Z" />
+            </svg>
+            <em aria-label="Cart items">{{ cart.itemCount() }}</em>
+            <span>
+              <small>Shopping cart</small>
+              <strong>{{ cart.total() | currency: 'USD' }}</strong>
+            </span>
+          </button>
+
+          <div class="account-actions" aria-label="Account actions">
+            <a routerLink="/sign-in" class="account-link">Sign in</a>
+            <a routerLink="/sign-up" class="account-link account-link-primary">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav-bar" aria-label="Primary navigation">
+      <div class="page-container nav-content">
+        <div class="nav-links">
+          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Home
+          </a>
+          <a routerLink="/shop" routerLinkActive="active">Shop</a>
+          <a routerLink="/about" routerLinkActive="active">About Us</a>
+          <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+        </div>
+
+        <a class="phone-link" href="tel:+962780000010">+962 7 8000 0010</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="mainContent" class="app-main" tabindex="-1">
+    <router-outlet />
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-container footer-grid">
+      <section class="footer-about" aria-labelledby="footerAboutTitle">
+        <h2 id="footerAboutTitle">About Kosa</h2>
+        <p>Fresh organic food delivered with a clean ecommerce experience.</p>
+        <div class="footer-contact">
+          <a href="tel:+962780000010">+962 7 8000 0010</a>
+          <span>or</span>
+          <a href="mailto:info@gmail.com">info@gmail.com</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="myAccountTitle">
+        <h2 id="myAccountTitle">Account</h2>
+        <a routerLink="/sign-in">Sign in</a>
+        <a routerLink="/sign-up">Sign up</a>
+        <a routerLink="/favorites">Favorites</a>
+        <a routerLink="/cart">Shopping Cart</a>
+      </section>
+
+      <section aria-labelledby="helpsTitle">
+        <h2 id="helpsTitle">Helps</h2>
+        <a routerLink="/contact">Contact</a>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/shop">Shop</a>
+      </section>
+
+      <section aria-labelledby="proxyTitle">
+        <h2 id="proxyTitle">Pages</h2>
+        <a routerLink="/home">Home</a>
+        <a routerLink="/about">About</a>
+        <a routerLink="/shop">Shop</a>
+      </section>
+    </div>
+
+    <div class="page-container footer-bottom">
+      <div class="social-links" aria-label="Social links">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Twitter">x</a>
+        <a href="#" aria-label="Instagram">ig</a>
+      </div>
+
+      <p>Kosa eCommerce &copy; 2026. All Rights Reserved</p>
+
+      <div class="payment-list" aria-label="Accepted payment methods">
+        <span>Apple Pay</span>
+        <span>Visa</span>
+        <span>Mastercard</span>
+      </div>
+    </div>
+  </footer>
+
+  @if (cart.isDrawerOpen()) {
+    <div class="drawer-backdrop" aria-hidden="true" (click)="cart.closeDrawer()"></div>
+
+    <aside class="cart-drawer" aria-labelledby="cartDrawerTitle" aria-modal="true" role="dialog">
+      <div class="drawer-header">
+        <h2 id="cartDrawerTitle">Shopping Cart</h2>
+        <button
+          type="button"
+          class="drawer-close"
+          aria-label="Close cart"
+          (click)="cart.closeDrawer()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      @if (cart.lines().length === 0) {
+        <div class="empty-cart">
+          <h3>Your cart is empty</h3>
+          <p>Add products from the shop to see them here.</p>
+        </div>
+      } @else {
+        <div class="cart-lines">
+          @for (line of cart.lines(); track line.id) {
+            <article class="cart-line">
+              <img [src]="line.imageUrl" [alt]="line.name">
+
+              <div>
+                <h3>{{ line.name }}</h3>
+                <p>{{ line.unitPrice | currency: 'USD' }}</p>
+
+                <div class="quantity-control" aria-label="Quantity selector">
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Decrease ' + line.name + ' quantity'"
+                    (click)="cart.decreaseQuantity(line.id)"
+                  >
+                    &minus;
+                  </button>
+                  <span aria-live="polite">{{ line.quantity }}</span>
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Increase ' + line.name + ' quantity'"
+                    (click)="cart.increaseQuantity(line.id)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        <div class="drawer-summary">
+          <span>Total</span>
+          <strong>{{ cart.total() | currency: 'USD' }}</strong>
+        </div>
+
+        <a routerLink="/cart" class="checkout-link" (click)="cart.closeDrawer()">View Cart</a>
+      }
+    </aside>
+  }
+</div>

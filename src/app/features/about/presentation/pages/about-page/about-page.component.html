@@ -1,0 +1,54 @@
+<main class="about-page">
+  <section class="intro-section" aria-labelledby="aboutTitle">
+    <div class="intro-copy">
+      <p class="eyebrow">About Kosa</p>
+      <h1 id="aboutTitle">{{ about.content.introTitle }}</h1>
+      <p>{{ about.content.introDescription }}</p>
+    </div>
+
+    <img
+      class="intro-image"
+      [src]="about.content.introImageUrl"
+      alt="Organic farm fields"
+    >
+  </section>
+
+  <section class="team-section" aria-labelledby="teamTitle">
+    <p class="eyebrow">Our promise</p>
+    <h2 id="teamTitle">Fresh food, careful sourcing, better daily meals.</h2>
+    <p>
+      Professional people are prepared to satisfy our customers by making fresh,
+      healthy, local, and organic products your first choice.
+    </p>
+  </section>
+
+  <section class="story-section" aria-labelledby="storyTitle">
+    <img
+      class="story-image"
+      [src]="about.content.storyImageUrl"
+      alt="Organic plant growing in soil"
+    >
+
+    <div class="story-copy">
+      <p class="eyebrow">Why choose us</p>
+      <h2 id="storyTitle">{{ about.content.storyTitle }}</h2>
+      <p>{{ about.content.storyDescription }}</p>
+
+      <div class="feature-grid">
+        @for (feature of about.content.features; track feature.title + feature.description) {
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M9.2 16.6 4.9 12.3 3.5 13.7l5.7 5.7L21 7.6 19.6 6.2 9.2 16.6Z" />
+              </svg>
+            </span>
+            <div>
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.description }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+</main>

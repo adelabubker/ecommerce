@@ -1,0 +1,101 @@
+<main class="shop-page">
+  <section class="shop-hero" aria-labelledby="shopPageTitle">
+    <p class="eyebrow">Fresh catalog</p>
+    <h1 id="shopPageTitle">{{ selectedCategory()?.name ?? 'Shop Fresh Products' }}</h1>
+    <p>
+      {{
+        selectedCategory()?.description ??
+          'Choose fresh produce, pantry favorites, and organic picks for your next order.'
+      }}
+    </p>
+  </section>
+
+  <section class="shop-layout" aria-label="Product catalog">
+    <aside class="category-panel" aria-label="Product categories">
+      <h2>Categories</h2>
+
+      <a routerLink="/shop" [class.active]="!categorySlug()">
+        <span>All Products</span>
+        <strong>{{ catalog.products.length }}</strong>
+      </a>
+
+      @for (category of categories; track category.slug) {
+        <a
+          [routerLink]="['/shop/category', category.slug]"
+          [class.active]="categorySlug() === category.slug"
+        >
+          <span>{{ category.name }}</span>
+          <strong>{{ catalog.getProductCountByCategory(category.slug) }}</strong>
+        </a>
+      }
+    </aside>
+
+    <section class="products-section" aria-labelledby="productsTitle">
+      <div class="section-header">
+        <div>
+          <p>{{ products().length }} products</p>
+          <h2 id="productsTitle">{{ selectedCategory()?.name ?? 'All Products' }}</h2>
+        </div>
+
+        @if (selectedCategory()) {
+          <a routerLink="/shop">View all</a>
+        }
+      </div>
+
+      @if (products().length > 0) {
+        <div class="product-grid">
+          @for (product of products(); track product.id) {
+            <article class="product-card">
+              <button
+                type="button"
+                class="favorite-toggle"
+                [class.active]="favorites.isFavorite(product.id)"
+                [attr.aria-pressed]="favorites.isFavorite(product.id)"
+                [attr.aria-label]="
+                  favorites.isFavorite(product.id)
+                    ? 'Remove ' + product.name + ' from favorites'
+                    : 'Add ' + product.name + ' to favorites'
+                "
+                (click)="toggleFavorite(product.id)"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 21s-7.2-4.4-9.6-8.7C.7 9.2 2.2 5.4 5.7 4.6c2-.5 3.8.3 5 1.8.3.4.8.4 1.1 0 1.2-1.5 3-2.3 5-1.8 3.5.8 5 4.6 3.3 7.7C19.2 16.6 12 21 12 21Z" />
+                </svg>
+              </button>
+
+              <a [routerLink]="['/shop/product', product.slug]">
+                <img [src]="product.imageUrl" [alt]="product.name">
+
+                <span>{{ product.categoryName }}</span>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.summary }}</p>
+              </a>
+
+              <div class="product-meta">
+                <strong>{{ product.price | currency: 'USD' }}</strong>
+                <small>{{ product.unit }}</small>
+              </div>
+
+              <div class="product-actions">
+                <button
+                  type="button"
+                  class="add-cart-button"
+                  [attr.aria-label]="'Add ' + product.name + ' to cart'"
+                  (click)="addToCart(product)"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <h2>No products found</h2>
+          <p>This category is empty for now.</p>
+          <a routerLink="/shop">Back to all products</a>
+        </div>
+      }
+    </section>
+  </section>
+</main>

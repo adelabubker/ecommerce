@@ -1,0 +1,328 @@
+.shop-page {
+  width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-5) 0 var(--space-6);
+}
+
+.shop-hero,
+.category-panel,
+.product-card,
+.empty-state {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(20, 45, 25, 0.04);
+}
+
+.shop-hero {
+  padding: var(--space-5);
+  background:
+    linear-gradient(90deg, rgba(246, 251, 246, 0.98), rgba(246, 251, 246, 0.78)),
+    url('/assets/images/hero/organic-food.png') right 2rem center / contain no-repeat;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--color-brand);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 560px;
+  margin: 0 0 0.75rem;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.shop-hero p:last-child {
+  max-width: 560px;
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.category-panel {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  padding: var(--space-2);
+}
+
+.category-panel h2 {
+  margin: 0 0 var(--space-2);
+  color: var(--color-ink);
+  font-size: 1.05rem;
+}
+
+.category-panel a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0.8rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.category-panel a:hover,
+.category-panel a.active {
+  color: var(--color-brand);
+  background: var(--color-subtle);
+}
+
+.category-panel strong {
+  display: inline-grid;
+  min-width: 2rem;
+  min-height: 2rem;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: #eef4ef;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.category-panel a.active strong {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+.section-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.section-header p {
+  margin: 0 0 0.25rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.55rem;
+}
+
+.section-header a,
+.empty-state a {
+  color: var(--color-brand);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.favorite-toggle {
+  position: absolute;
+  inset-block-start: 0.85rem;
+  inset-inline-end: 0.85rem;
+  z-index: 2;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(227, 236, 229, 0.9);
+  border-radius: 50%;
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 20px rgba(20, 45, 25, 0.12);
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.favorite-toggle:hover,
+.favorite-toggle.active {
+  border-color: rgba(255, 99, 99, 0.3);
+  color: #e23d3d;
+  background: #fff3f3;
+  transform: translateY(-1px);
+}
+
+.favorite-toggle svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+.product-card:hover {
+  border-color: rgba(0, 178, 7, 0.45);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.product-card a {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: var(--color-subtle);
+}
+
+.product-card span,
+.product-card h3,
+.product-card p,
+.product-meta,
+.product-actions {
+  padding-inline: var(--space-2);
+}
+
+.product-card span {
+  margin-top: var(--space-2);
+  color: var(--color-brand);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.product-card h3 {
+  margin: 0.45rem 0 0.4rem;
+  color: var(--color-ink);
+  font-size: 1.02rem;
+}
+
+.product-card p {
+  flex: 1;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.product-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-1);
+}
+
+.product-meta strong {
+  color: var(--color-ink);
+}
+
+.product-meta small {
+  color: var(--color-muted);
+}
+
+.product-actions {
+  padding-bottom: var(--space-2);
+}
+
+.add-cart-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  background: var(--color-brand);
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.add-cart-button:hover {
+  background: var(--color-brand-strong);
+  box-shadow: 0 10px 22px rgba(0, 178, 7, 0.2);
+  transform: translateY(-1px);
+}
+
+.add-cart-button:active {
+  transform: translateY(0);
+}
+
+.empty-state {
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin: 0 0 0.5rem;
+}
+
+.empty-state p {
+  margin: 0 0 var(--space-2);
+  color: var(--color-muted);
+}
+
+@media (max-width: 980px) {
+  .shop-hero {
+    background: var(--color-subtle);
+  }
+
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .category-panel {
+    position: static;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .shop-hero {
+    padding: var(--space-3);
+  }
+
+  .section-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}

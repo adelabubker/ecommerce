@@ -1,0 +1,61 @@
+<main class="account-page">
+  <section class="account-hero" aria-labelledby="accountTitle">
+    <div>
+      <p class="eyebrow">Sign in</p>
+      <h1 id="accountTitle">Welcome back to your Kosa account.</h1>
+      <p>
+        Access your favorites, cart, and saved grocery details for a smoother order.
+      </p>
+    </div>
+
+    <a routerLink="/sign-up">Create account</a>
+  </section>
+
+  <section class="account-shell" aria-label="Account access">
+    <div class="account-panel">
+      <form class="account-form" aria-labelledby="signinTitle">
+        <div>
+          <p class="form-kicker">Welcome back</p>
+          <h2 id="signinTitle">Sign in to your account</h2>
+        </div>
+
+        <label>
+          <span>Email address</span>
+          <input type="email" autocomplete="email" placeholder="name@example.com" required>
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input type="password" autocomplete="current-password" placeholder="Enter password" required>
+        </label>
+
+        <div class="form-row">
+          <label class="check-field">
+            <input type="checkbox">
+            <span>Remember me</span>
+          </label>
+
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit">Sign in</button>
+
+        <p class="account-switch">
+          New to Kosa?
+          <a routerLink="/sign-up">Create an account</a>
+        </p>
+      </form>
+    </div>
+
+    <aside class="account-benefits" aria-label="Account benefits">
+      <span>Why sign in?</span>
+      <h2>Everything feels faster when your details are ready.</h2>
+
+      <ul>
+        <li>Keep favorite products saved.</li>
+        <li>Review cart totals before checkout.</li>
+        <li>Prepare delivery details for Amman orders.</li>
+      </ul>
+    </aside>
+  </section>
+</main>
