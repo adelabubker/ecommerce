@@ -1,28 +1,28 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Product } from '../../../../../core/models/catalog.models';
-import { ProductCatalogService } from '../../../../../core/services/product-catalog.service';
-import { CartFacade } from '../../../../cart/application/cart.facade';
-import { FavoritesFacade } from '../../../../favorites/application/favorites.facade';
+import { CartFacade } from '../../../../cart/presentation/facades/cart.facade';
+import { FavoritesFacade } from '../../../../favorites/presentation/facades/favorites.facade';
+import { ShopFacade } from '../../facades/shop.facade';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-shop-page',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink],
+  imports: [RouterLink, ProductCardComponent],
   templateUrl: './shop-page.component.html',
   styleUrl: './shop-page.component.scss',
 })
 export class ShopPageComponent {
   private readonly route = inject(ActivatedRoute);
-  readonly catalog = inject(ProductCatalogService);
+  readonly shop = inject(ShopFacade);
   readonly cart = inject(CartFacade);
   readonly favorites = inject(FavoritesFacade);
 
-  readonly categories = this.catalog.categories;
+  readonly categories = this.shop.categories;
   readonly categorySlug = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('categorySlug'))),
     {
@@ -30,9 +30,9 @@ export class ShopPageComponent {
     },
   );
 
-  readonly selectedCategory = computed(() => this.catalog.getCategoryBySlug(this.categorySlug()));
+  readonly selectedCategory = computed(() => this.shop.getCategoryBySlug(this.categorySlug()));
 
-  readonly products = computed(() => this.catalog.getProductsByCategory(this.categorySlug()));
+  readonly products = computed(() => this.shop.getProductsByCategory(this.categorySlug()));
 
   toggleFavorite(productId: string): void {
     this.favorites.toggle(productId);

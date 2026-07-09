@@ -5,8 +5,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Product } from '../../../../../core/models/catalog.models';
-import { ProductCatalogService } from '../../../../../core/services/product-catalog.service';
-import { CartFacade } from '../../../../cart/application/cart.facade';
+import { CartFacade } from '../../../../cart/presentation/facades/cart.facade';
+import { ShopFacade } from '../../facades/shop.facade';
 
 @Component({
   selector: 'app-product-details-page',
@@ -17,7 +17,7 @@ import { CartFacade } from '../../../../cart/application/cart.facade';
 })
 export class ProductDetailsPageComponent {
   private readonly route = inject(ActivatedRoute);
-  private readonly catalog = inject(ProductCatalogService);
+  private readonly shop = inject(ShopFacade);
   readonly cart = inject(CartFacade);
   readonly selectedImage = signal<string | null>(null);
 
@@ -29,7 +29,7 @@ export class ProductDetailsPageComponent {
   );
 
   readonly product = computed(() =>
-    this.catalog.products.find((product) => product.slug === this.productSlug()),
+    this.shop.allProducts.find((product) => product.slug === this.productSlug()),
   );
 
   readonly activeImage = computed(() => {
@@ -54,7 +54,7 @@ export class ProductDetailsPageComponent {
 
   getGalleryImages(product: Product): string[] {
     const categoryImage =
-      this.catalog.getCategoryBySlug(product.categorySlug)?.imageUrl ?? product.imageUrl;
+      this.shop.getCategoryBySlug(product.categorySlug)?.imageUrl ?? product.imageUrl;
 
     return [
       product.imageUrl,

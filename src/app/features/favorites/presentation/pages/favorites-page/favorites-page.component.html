@@ -5,9 +5,9 @@
     <p>Save products you love and return to them when you are ready to order.</p>
   </section>
 
-  @if (favoriteProducts().length > 0) {
+  @if (favorites.favoriteProducts().length > 0) {
     <section class="favorites-grid" aria-label="Favorite products">
-      @for (product of favoriteProducts(); track product.id) {
+      @for (product of favorites.favoriteProducts(); track product.id) {
         <article class="favorite-card">
           <button
             type="button"

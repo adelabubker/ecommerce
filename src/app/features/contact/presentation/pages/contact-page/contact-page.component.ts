@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ContactFacade } from '../../../application/facades/contact.facade';
+import { ContactFacade } from '../../facades/contact.facade';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 
 @Component({
