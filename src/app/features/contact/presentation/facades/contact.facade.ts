@@ -27,13 +27,13 @@ export class ContactFacade {
   ];
 
   readonly submitState = signal<ContactSubmitStateViewModel>({
-    status: 'idle',
+    status: 'Empty',
     message: '',
   });
 
   submitMessage(): void {
     this.submitState.set({
-      status: 'success',
+      status: 'Success',
       message: 'Your message was sent successfully.',
     });
   }

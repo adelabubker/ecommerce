@@ -1,3 +1,5 @@
+export type EnterpriseUiState = 'Loading' | 'Success' | 'Empty' | 'Error' | 'Offline';
+
 export interface ContactInfoItemViewModel {
   readonly label: string;
   readonly value: string;
@@ -7,6 +9,6 @@ export interface ContactInfoItemViewModel {
 }
 
 export interface ContactSubmitStateViewModel {
-  readonly status: 'idle' | 'success' | 'error';
+  readonly status: EnterpriseUiState;
   readonly message: string;
 }

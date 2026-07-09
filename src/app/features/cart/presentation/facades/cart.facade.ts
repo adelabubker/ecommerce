@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 
-import { Product } from '../../../core/models/catalog.models';
-import { CartLine } from '../domain/cart.models';
+import { Product } from '../../../../core/models/catalog.models';
+import { CartLine } from '../../domain/cart.models';
 
 @Injectable({ providedIn: 'root' })
 export class CartFacade {
