@@ -1,7 +1,6 @@
 import { computed, Injectable, inject, signal } from '@angular/core';
 
-import { Product } from '../../../../core/models/catalog.models';
-import { ProductCatalogService } from '../../../../core/services/product-catalog.service';
+import { ProductCatalogService } from '../../../core/services/product-catalog.service';
 
 const FAVORITES_STORAGE_KEY = 'kosa.favoriteProductIds';
 

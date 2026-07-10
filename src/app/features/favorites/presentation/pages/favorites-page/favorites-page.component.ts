@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { FavoritesFacade } from '../../facades/favorites.facade';
+import { FavoritesFacade } from '../../../application/favorites.facade';
 
 @Component({
   selector: 'app-favorites-page',

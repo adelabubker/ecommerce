@@ -5,8 +5,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Product } from '../../../../../core/models/catalog.models';
-import { CartFacade } from '../../../../cart/presentation/facades/cart.facade';
-import { ShopFacade } from '../../facades/shop.facade';
+import { CartFacade } from '../../../../cart/application/cart.facade';
+import { ShopFacade } from '../shop-page/shop-page.component';
 
 @Component({
   selector: 'app-product-details-page',
