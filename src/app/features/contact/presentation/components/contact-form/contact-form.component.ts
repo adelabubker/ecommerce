@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ContactFacade } from '../../facades/contact.facade';
+import { ContactFacade } from '../../../application/facades/contact.facade';
 
 type ContactFormGroup = FormGroup<{
   name: FormControl<string>;

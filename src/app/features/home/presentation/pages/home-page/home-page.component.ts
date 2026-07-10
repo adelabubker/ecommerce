@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { HomeFacade } from '../../facades/home.facade';
+import { HomeFacade } from '../../../application/facades/home.facade';
 
 @Component({
   selector: 'app-home-page',
