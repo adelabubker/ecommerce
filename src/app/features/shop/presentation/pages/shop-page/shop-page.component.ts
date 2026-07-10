@@ -63,42 +63,97 @@ import { FavoritesFacade } from '../../../../favorites/application/favorites.fac
     }
   `
 })
+/**
+ * ProductCardComponent is a stateless, presentational (dumb) component
+ * responsible purely for rendering a single product card.
+ * It conforms to the ENG-STD-WEB-001 taxonomy by relying strictly on inputs
+ * and bubbling user interactions up via outputs without injecting any services.
+ */
 export class ProductCardComponent {
+  /** The product model to render */
   @Input({ required: true }) product!: Product;
+
+  /** Flag indicating whether the current product is marked as favorite */
   @Input() isFavorite = false;
 
+  /** Emits the product ID when the user toggles the wishlist button */
   @Output() readonly toggleFavorite = new EventEmitter<string>();
+
+  /** Emits the full product object when the user clicks 'Add to Cart' */
   @Output() readonly addToCart = new EventEmitter<Product>();
 
+  /**
+   * Handles click events on the favorite wishlist button.
+   * Bubbles the product's ID up to the parent component.
+   */
   onToggleFavorite(): void {
+    // Emit product ID up to the parent component to handle local persistence
     this.toggleFavorite.emit(this.product.id);
   }
 
+  /**
+   * Handles click events on the 'Add to Cart' action button.
+   * Bubbles the complete product object up to the parent component.
+   */
   onAddToCart(): void {
+    // Emit product model up to the parent component to handle cart additions
     this.addToCart.emit(this.product);
   }
 }
 
+/**
+ * ShopFacade is the Architectural Presentation Facade (mediator) for the Shop feature.
+ * It isolates the presentation components from direct communication with the core catalog service.
+ * It abstracts state management and encapsulates all data retrievals.
+ */
 @Injectable({ providedIn: 'root' })
 export class ShopFacade {
+  /** Injects the core, singleton ProductCatalogService */
   private readonly catalog = inject(ProductCatalogService);
 
+  /** Read-only list of all product categories */
   readonly categories = this.catalog.categories;
+
+  /** Read-only list of all products in the database */
   readonly allProducts = this.catalog.products;
 
+  /**
+   * Retrieves category metadata details using its slug identifier.
+   * @param slug The unique category slug or null
+   * @returns The matching ProductCategory object, or undefined if not found
+   */
   getCategoryBySlug(slug: string | null) {
+    // Delegates retrieval safely to the core catalog service
     return this.catalog.getCategoryBySlug(slug);
   }
 
+  /**
+   * Filters and retrieves products belonging to a specific category.
+   * If the slug is null, it returns all products in the database.
+   * @param slug The category slug identifier or null
+   * @returns An array of matching Product models
+   */
   getProductsByCategory(slug: string | null) {
+    // Delegates category filtering safely to the core catalog service
     return this.catalog.getProductsByCategory(slug);
   }
 
+  /**
+   * Counts and returns the total number of products inside a specific category.
+   * Used primarily by sidebar lists to show category counts.
+   * @param slug The category slug identifier
+   * @returns The total number of products
+   */
   getProductCountByCategory(slug: string) {
+    // Delegates product count query safely to the core catalog service
     return this.catalog.getProductCountByCategory(slug);
   }
 }
 
+/**
+ * ShopPageComponent is a route entry point (Smart Component) responsible
+ * for orchestration, managing routing signals, and binding data to presentation elements.
+ */
 @Component({
   selector: 'app-shop-page',
   standalone: true,
@@ -107,12 +162,25 @@ export class ShopFacade {
   styleUrl: './shop-page.component.scss',
 })
 export class ShopPageComponent {
+  /** ActivatedRoute used to subscribe to route path parameters */
   private readonly route = inject(ActivatedRoute);
+
+  /** ShopFacade encapsulating catalog core operations */
   readonly shop = inject(ShopFacade);
+
+  /** CartFacade encapsulating shopping cart actions */
   readonly cart = inject(CartFacade);
+
+  /** FavoritesFacade encapsulating wishlist local persistence */
   readonly favorites = inject(FavoritesFacade);
 
+  /** Categories list bound directly to the side panel sidebar */
   readonly categories = this.shop.categories;
+
+  /**
+   * Signal tracking the current categorySlug from the active route parameter.
+   * Uses toSignal to adapt the RxJS route param map into an Angular Signal.
+   */
   readonly categorySlug = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('categorySlug'))),
     {
@@ -120,16 +188,35 @@ export class ShopPageComponent {
     },
   );
 
+  /**
+   * Computed signal that recalculates the selected category metadata
+   * whenever the categorySlug signal changes.
+   */
   readonly selectedCategory = computed(() => this.shop.getCategoryBySlug(this.categorySlug()));
 
+  /**
+   * Computed signal that recalculates the list of products to render
+   * whenever the categorySlug signal changes.
+   */
   readonly products = computed(() => this.shop.getProductsByCategory(this.categorySlug()));
 
+  /**
+   * Toggles the favorite wishlist status of a product.
+   * @param productId The unique ID of the product
+   */
   toggleFavorite(productId: string): void {
+    // Instructs FavoritesFacade to toggle state and save to local storage
     this.favorites.toggle(productId);
   }
 
+  /**
+   * Adds a product to the shopping cart drawer and opens the sliding drawer.
+   * @param product The product model to add
+   */
   addToCart(product: Product): void {
+    // Instructs CartFacade to add the product
     this.cart.addProduct(product);
+    // Open the side-drawer to provide immediate visual feedback to the user
     this.cart.openDrawer();
   }
 }
