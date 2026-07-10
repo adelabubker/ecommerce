@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AboutFacade } from '../../facades/about.facade';
+import { AboutFacade } from '../../../application/facades/about.facade';
 
 @Component({
   selector: 'app-about-page',

@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { CartFacade } from '../../facades/cart.facade';
+import { CartFacade } from '../../../application/cart.facade';
 
 @Component({
   selector: 'app-cart-page',
