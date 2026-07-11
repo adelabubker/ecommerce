@@ -13,38 +13,58 @@
 
   <section class="account-shell" aria-label="Create account">
     <div class="account-panel">
-      <form class="account-form" aria-labelledby="signupTitle">
+      <form class="account-form" [formGroup]="form" (ngSubmit)="submit()" aria-labelledby="signupTitle">
         <div>
           <p class="form-kicker">Create account</p>
           <h2 id="signupTitle">Join Kosa today</h2>
         </div>
 
+        @if (submitStatus() === 'Success') {
+          <div class="success-message" role="status" style="padding: 1rem; background-color: #d1e7dd; color: #0f5132; border-radius: 4px; margin-bottom: 1rem;">
+            Successfully registered! Please sign in to access your dashboard.
+          </div>
+        }
+
         <label>
           <span>Full name</span>
-          <input type="text" autocomplete="name" placeholder="Your full name" required>
+          <input type="text" formControlName="name" autocomplete="name" placeholder="Your full name">
+          @if (hasError('name')) {
+            <p class="error-message" style="color: #dc3545; font-size: 0.85rem; margin-top: 0.25rem;">Full name is required.</p>
+          }
         </label>
 
         <label>
           <span>Email address</span>
-          <input type="email" autocomplete="email" placeholder="name@example.com" required>
+          <input type="email" formControlName="email" autocomplete="email" placeholder="name@example.com">
+          @if (hasError('email')) {
+            <p class="error-message" style="color: #dc3545; font-size: 0.85rem; margin-top: 0.25rem;">Enter a valid email address.</p>
+          }
         </label>
 
         <label>
           <span>Password</span>
-          <input type="password" autocomplete="new-password" placeholder="Create password" required>
+          <input type="password" formControlName="password" autocomplete="new-password" placeholder="Create password">
+          @if (hasError('password')) {
+            <p class="error-message" style="color: #dc3545; font-size: 0.85rem; margin-top: 0.25rem;">Password must be at least 6 characters long.</p>
+          }
         </label>
 
         <label>
           <span>Phone number</span>
-          <input type="tel" autocomplete="tel" placeholder="+962 7 0000 0000">
+          <input type="tel" formControlName="phone" autocomplete="tel" placeholder="+962 7 0000 0000">
         </label>
 
         <label class="check-field">
-          <input type="checkbox" required>
+          <input type="checkbox" formControlName="agreeUpdates">
           <span>I agree to receive order updates from Kosa.</span>
+          @if (hasError('agreeUpdates')) {
+            <p class="error-message" style="color: #dc3545; font-size: 0.85rem; margin-top: 0.25rem; display: block;">You must agree to receive updates.</p>
+          }
         </label>
 
-        <button type="submit">Create account</button>
+        <button type="submit" [disabled]="submitStatus() === 'Loading'">
+          {{ submitStatus() === 'Loading' ? 'Creating account...' : 'Create account' }}
+        </button>
 
         <p class="account-switch">
           Already registered?
